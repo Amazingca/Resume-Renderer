@@ -40,7 +40,7 @@ def constructData():
     with open("./config.txt") as data:
         rowType = ""
         newRow = False
-        for line in data:
+        for i, line in enumerate(data):
             line = line[:-1]
             if line[0:4] == "--- ":
                 rowType = line.split(" ")[1]
@@ -54,20 +54,24 @@ def constructData():
                 config[rowType][line.split("=")[0]] = line.split("=")[1]
                 if line.split("=")[0] in integerKeywords:
                     config[rowType][line.split("=")[0]] = int(line.split("=")[1])
-            elif rowType == "ROW":
+            elif "ROW" in rowType:
                 if "ROWS" not in config:
                     config["ROWS"] = []
                 isBullet = line.split("=")[0] == "bullets"
                 if newRow == True:
                     config["ROWS"].append({
+                        "divider": True if rowType == "ROW" else False,
                         line.split("=")[0]: line.split("=")[1] if not isBullet else line.split("=")[1].split(",,")
                     })
                     newRow = False
                 else:
                     config["ROWS"][-1][line.split("=")[0]] = line.split("=")[1] if not isBullet else line.split("=")[1].split(",,")
 
-def sectionDivider(f):
-    print(config["VARIABLES"]["delimiter"] * config["VARIABLES"]["width"], file=f)
+def sectionDivider(divide, f):
+    if (divide == True):
+        print(config["VARIABLES"]["delimiter"] * config["VARIABLES"]["width"], file=f)
+    else:
+        print("", file=f)
 
 def formatEmail():
     return config["PROFILE"]["email"].replace("@", config["VARIABLES"]["onlineDelimiter"] if config["VARIABLES"]["isOnline"] == "true" else "@")
@@ -89,19 +93,24 @@ def outputHeader(f):
             case _:
                 print(config["PROFILE"][key], file=f)
 
-    sectionDivider(f)
-
 def outputRows(f):
     for row in config["ROWS"]:
-        titleRight = row['titleRight'] if 'titleRight' in row else ''
-        descriptionRight = row['descriptionRight'] if 'descriptionRight' in row else ''
-        print(f"""{row["title"].upper()}{f"{titleRight:>{config['VARIABLES']['width'] - len(row['title'])}}"}""", file=f)
-        print(f"""{row["description"]}{f"{descriptionRight:>{config['VARIABLES']['width'] - len(row['description'])}}"}""", file=f)
-        for line in row["body"].split("\\n"):
-            print("\n".join(cropWidth(line, "")), file=f) # Print each newline independant from cutoffs when cropping
-        for bullet in row["bullets"]:
-            print("\n".join(cropWidth(bullet, config['VARIABLES']['bullet'])), file=f)
-        sectionDivider(f)
+        sectionDivider(row["divider"], f)
+        if "title" in row:
+            titleRight = row['titleRight'] if 'titleRight' in row else ''
+            print(f"""{row["title"].upper()}{f"{titleRight:>{config['VARIABLES']['width'] - len(row['title'])}}"}""", file=f)
+        if "subtitle" in row:
+            subtitleRight = row['subtitleRight'] if 'subtitleRight' in row else ''
+            print(f"""{row["subtitle"]}{f"{subtitleRight:>{config['VARIABLES']['width'] - len(row['subtitle'])}}"}""", file=f)
+        if "description" in row:
+            descriptionRight = row['descriptionRight'] if 'descriptionRight' in row else ''
+            print(f"""{row["description"]}{f"{descriptionRight:>{config['VARIABLES']['width'] - len(row['description'])}}"}""", file=f)
+        if "body" in row:
+            for line in row["body"].split("\\n"):
+                print("\n".join(cropWidth(line, "")), file=f) # Print each newline independant from cutoffs when cropping
+        if "bullets" in row:
+            for bullet in row["bullets"]:
+                print("\n".join(cropWidth(bullet, config['VARIABLES']['bullet'])), file=f)
 
 def cropWidth(line, newLineSpacer):
     line = newLineSpacer + line
