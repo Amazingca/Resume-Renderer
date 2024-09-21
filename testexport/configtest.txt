@@ -1,0 +1,32 @@
+--- VARIABLES
+# Basic variables, such as whether the resume is posted online to replace "@" with {onlineDelimiter}.
+title=Title of Resume
+isOnline=true
+onlineDelimiter= [at] 
+delimiter=,
+adelimiter=\n
+bullet=  -  
+width=65
+applyWrap=true
+--- PROFILE
+# Basic profile info
+name=Your Name Here
+pronouns=Your pronouns here
+email=email@example.com
+phone=+0 (123) 456-7890
+linkedin=https://linkedin.com/in/{username}
+github=Optional GitHub
+--- ROW
+title=Title
+titleRight=Right Align Title
+description=A description
+descriptionRight=Right description
+body=Some insane body text with newline \nhere
+bullets=every,,bullet,,point with comma,,here :,
+--- ROW
+title=Here is a test of a very long row
+titleRight=Some right-side stuff
+description=A very long description for my long row
+descriptionRight=Long right description
+body=Basically, just a very long string of text that's meant to see how well line wrapping is on the thing. Really not so sure how difficult this will be to implement, but we'll see.
+bullets=Here's long bullet point #1. I honestly think that we might be able to just pull this off without any disaster, but honestly we'll see.,,Shorter row here,,Here's another long row just to see how well the wrapper does with these new-lines. If we can do multi-stacking with them then I'm sure it'll scale to production-level resumes.
