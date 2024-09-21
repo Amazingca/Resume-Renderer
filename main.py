@@ -36,8 +36,8 @@ config = {}
 keyPairDataTypes = ["VARIABLES", "PROFILE"]
 integerKeywords = ["width"]
 
-def constructData():
-    with open("./config.txt") as data:
+def constructData(path):
+    with open(path) as data:
         rowType = ""
         newRow = False
         for i, line in enumerate(data):
@@ -126,7 +126,8 @@ def cropWidth(line, newLineSpacer):
     return lines
 
 if __name__ == "__main__":
-    constructData()
+    path = input("Enter path for the config file, or nothing for default (\"./config.txt\"): ")
+    constructData(path if path != "" else "./config.txt")
     print(f"Creating Resume{': ' if 'title' in config['VARIABLES'] else ''}", end="" if "title" in config["VARIABLES"] else "\n")
     if "title" in config["VARIABLES"]:
         print(config["VARIABLES"]["title"])
