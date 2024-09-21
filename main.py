@@ -70,8 +70,8 @@ def constructData(path):
 def sectionDivider(divide, f):
     if (divide == True):
         print(config["VARIABLES"]["delimiter"] * config["VARIABLES"]["width"], file=f)
-    else:
-        print("", file=f)
+    elif config["VARIABLES"]["adelimiter"] != "":
+        print(config["VARIABLES"]["adelimiter"] * config["VARIABLES"]["width"] if config["VARIABLES"]["adelimiter"] != "\\n" else "", file=f)
 
 def formatEmail():
     return config["PROFILE"]["email"].replace("@", config["VARIABLES"]["onlineDelimiter"] if config["VARIABLES"]["isOnline"] == "true" else "@")
@@ -113,6 +113,8 @@ def outputRows(f):
                 print("\n".join(cropWidth(bullet, config['VARIABLES']['bullet'])), file=f)
 
 def cropWidth(line, newLineSpacer):
+    if (config["VARIABLES"]["applyWrap"] == "false"):
+        return [newLineSpacer + line]
     line = newLineSpacer + line
     lines = []
     while (len(line) > config["VARIABLES"]["width"]): # While we still have line overflow
