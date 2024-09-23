@@ -86,9 +86,10 @@ def outputHeader(f):
             case "phone":
                 if len(config["PROFILE"]) >= 4 and "pronouns" in config["PROFILE"]:
                     print(f"""{config["PROFILE"]["pronouns"]}{f"{config['PROFILE'][key]:>{config['VARIABLES']['width'] - len(config['PROFILE']['pronouns'])}}"}""", file=f)
-            case "pronouns":
-                continue        
-            case "email":
+            case "pronouns" | "email":
+                continue
+            case "linkedin" | "github":
+                print(f"{config['PROFILE'][key]:>{config['VARIABLES']['width']}}", file=f)
                 continue
             case _:
                 print(config["PROFILE"][key], file=f)
@@ -133,6 +134,7 @@ if __name__ == "__main__":
     print(f"Creating Resume{': ' if 'title' in config['VARIABLES'] else ''}", end="" if "title" in config["VARIABLES"] else "\n")
     if "title" in config["VARIABLES"]:
         print(config["VARIABLES"]["title"])
-    with open(f"./{config['PROFILE']['name'].split(' ')[-1]}_Resume_{date.today()}.txt", "a") as f:
+    fileName = f"./{config['PROFILE']['name'].split(' ')[0]}{config['PROFILE']['name'].split(' ')[-1]}_Resume.txt"
+    with open(fileName, "a") as f:
         outputHeader(f)
         outputRows(f)
