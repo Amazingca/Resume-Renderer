@@ -1,7 +1,7 @@
 Your Name Here                             email [at] example.com
 Your pronouns here                              +0 (123) 456-7890
-https://linkedin.com/in/{username}
-Optional GitHub
+                               https://linkedin.com/in/{username}
+                                                  Optional GitHub
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 TITLE                                           Right Align Title
 A description                                   Right description
@@ -10,7 +10,7 @@ here
   -  every
   -  bullet
   -  point with comma
-  -  here :,
+  -  here: ,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 HERE IS A TEST OF A VERY LONG ROW           Some right-side stuff
 A very long description for my long row    Long right description
@@ -23,4 +23,10 @@ difficult this will be to implement, but we'll see.
   -  Shorter row here
   -  Here's another long row just to see how well the wrapper 
      does with these new-lines. If we can do multi-stacking with 
-     them then I'm sure it'll scale to production-level resumes
+     them then I'm sure it'll scale to production-level resumes.
+
+HERE'S A ROW WITH DIFFERENT SEPARATION         Another right-side
+The other description here                      Description right
+Again, another line-wrapped display of everything. Currently 
+writing this in Windows Notepad. Remember when it used to not 
+have spellchecking? Wild, I know.

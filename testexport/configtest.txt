@@ -21,8 +21,8 @@ title=Title
 titleRight=Right Align Title
 description=A description
 descriptionRight=Right description
-body=Some insane body text with newline \nhere
-bullets=every,,bullet,,point with comma,,here :,
+body=Some insane body text with newline \nhere.
+bullets=every,,bullet,,point with comma,,here: ,
 --- ROW
 title=Here is a test of a very long row
 titleRight=Some right-side stuff
@@ -30,3 +30,10 @@ description=A very long description for my long row
 descriptionRight=Long right description
 body=Basically, just a very long string of text that's meant to see how well line wrapping is on the thing. Really not so sure how difficult this will be to implement, but we'll see.
 bullets=Here's long bullet point #1. I honestly think that we might be able to just pull this off without any disaster, but honestly we'll see.,,Shorter row here,,Here's another long row just to see how well the wrapper does with these new-lines. If we can do multi-stacking with them then I'm sure it'll scale to production-level resumes.
+--- AROW
+# Using the term "AROW", you can create a row that is divided by an empty line, rather than a delimiter.
+title=Here's a row with different separation
+titleRight=Another right-side
+description=The other description here
+descriptionRight=Description right
+body=Again, another line-wrapped display of everything. Currently writing this in Windows Notepad. Remember when it used to not have spellchecking? Wild, I know..
